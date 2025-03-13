@@ -26,6 +26,9 @@ class SuperTrendScan(Strategy):
         self.instrument = instrument
 
     def caculate_indicators(self, data: pd.DataFrame):
+        if isinstance(data.columns, pd.MultiIndex):
+            data.columns = data.columns.get_level_values(0)
+    
         ema200 = TA.EMA(data, 200)
         st_df = supertrend(data, period=12, ATR_multiplier=2)
 

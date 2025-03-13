@@ -5,7 +5,7 @@ from datetime import datetime
 from autotrader.strategy import Strategy
 from autotrader.indicators import crossover
 from autotrader.brokers.broker import Broker
-
+import pandas as pd
 
 class LongEMAcrossOver(Strategy):
     """EMA Crossover example strategy."""
@@ -25,6 +25,9 @@ class LongEMAcrossOver(Strategy):
         self.broker = broker
 
     def create_plotting_indicators(self, data: DataFrame):
+        if isinstance(data.columns, pd.MultiIndex):
+            data.columns = data.columns.get_level_values(0)
+
         # Construct indicators dict for plotting
         slow_ema = TA.EMA(data, self.params["slow_ema"])
         fast_ema = TA.EMA(data, self.params["fast_ema"])

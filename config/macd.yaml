@@ -11,7 +11,7 @@ PARAMETERS:
   # Exit level parameters
   RR: 1.5
 
-WATCHLIST: ['ETH-USD',]
+WATCHLIST: ['MSFT']
             # 'EURJPY=X',
             # 'EURAUD=X',
             # 'AUDJPY=X']

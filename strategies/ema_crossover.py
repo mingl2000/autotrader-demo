@@ -24,6 +24,8 @@ class EMAcrossOver(Strategy):
         self.broker = broker
 
     def create_plotting_indicators(self, data: pd.DataFrame):
+        if isinstance(data.columns, pd.MultiIndex):
+            data.columns = data.columns.get_level_values(0)
         # Construct indicators dict for plotting
         self.indicators = {
             "Fast EMA": {

@@ -28,7 +28,11 @@ class SimpleMACD(Strategy):
         self.instrument = instrument
 
     def create_plotting_indicators(self, data: pd.DataFrame):
+        print('--------------------------------------------',type(data))
         # Construct indicators dict for plotting
+        if isinstance(data.columns, pd.MultiIndex):
+            data.columns = data.columns.get_level_values(0)
+    
         ema, MACD, MACD_CO, MACD_CO_vals, swings = self.generate_features(data)
         self.indicators = {
             "MACD (12/26/9)": {
@@ -39,6 +43,7 @@ class SimpleMACD(Strategy):
             },
             "EMA (200)": {"type": "MA", "data": ema},
         }
+        print('--------------------------------------------',type(data))
 
     def generate_features(self, data: pd.DataFrame):
         # 200EMA
